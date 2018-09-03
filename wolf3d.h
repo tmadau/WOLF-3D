@@ -6,28 +6,28 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:01:22 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/03 16:18:29 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/03 18:06:24 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_H
 # define WOLF_H
-# include <stdio.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/libft.h"
-# include <stdlib.h>
-//# include <SDL2/SDL.h>
 # include "/goinfre/tmadau/.brew/include/SDL2/SDL.h"
+# include "libft/libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <math.h>
 
 # define WIN_HEIGHT 350
 # define WIN_WIDTH 515
-# define BUFF_SIZE	32
 
 typedef struct		s_info
 {
 	double			**map;
-	int				row;
+	size_t			row;
 	int				x;
 	int				y;
 	int				fill_x;
@@ -76,16 +76,14 @@ typedef struct		s_info
 	double			old_plane_x;
 }					t_info;
 
-int					get_next_line(const int fd, char **line);
-void				get_x_and_y(char *str, t_info *ev);
-int					ft_count(const char *s, char c);
-void				map_alloc(char *str, t_info *ev);
-t_info				ft_ray_calc(t_info *ev);
-t_info				ft_side_dist_calc(t_info *ev);
-t_info				ft_dda_calc(t_info *ev);
-t_info				ft_draw_stuff(t_info *ev);
-t_info				ft_render_stuff(t_info *ev);
-t_info				draw_ceiling(t_info *ev);
-void				events(t_info *ev);
+//void				get_x_and_y(char *str, t_info *ev);
+//void				map_alloc(char *str, t_info *ev);
+//t_info				ft_ray_calc(t_info *ev);
+//t_info				ft_side_dist_calc(t_info *ev);
+//t_info				ft_dda_calc(t_info *ev);
+//t_info				ft_draw_stuff(t_info *ev);
+//t_info				ft_render_stuff(t_info *ev);
+//t_info				draw_ceiling(t_info *ev);
+//void				events(t_info *ev);
 
 #endif
