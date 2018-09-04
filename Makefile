@@ -6,7 +6,7 @@
 #    By: tmadau <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/24 14:02:48 by tmadau            #+#    #+#              #
-#    Updated: 2018/09/03 17:22:43 by tmadau           ###   ########.fr        #
+#    Updated: 2018/09/04 11:08:09 by tmadau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INCLUDES = -I./libft
 
 CC = gcc
 
-CF = -c -Wall -Wextra -Werror
+CF = -Wall -Wextra -Werror
 
 SDLFLAGS = -lSDL2 -I ~/.brew/include -L ~/.brew/lib
 
@@ -35,8 +35,7 @@ $(NAME): $(OFILES)
 	@echo "$(KGRN)| WOLF3D LOADING ⚪ ⚪⚪ ⚪⚪⚪ ⚪⚪⚪⚪ ⚪⚪⚪⚪⚪⚪⚪ |"
 	@echo "$(KGRN)+-------------------------------------------------------+"
 	@make -C libft/
-	@$(CC) $(CF) -I $(LIB) -c $(CFILES)
-	@$(CC) -o $(NAME) $(OFILES) $(SDLFLAGS)
+	@$(CC) $(CF) -o $(NAME) $(OFILES) $(SDLFLAGS) $(LIB)
 	@echo "$(KGRN)+-------------------------------------------------------+"
 	@echo "$(KGRN)| READY ⭐⭐⭐⭐⭐  press ./wolf3d maps/map00 to run    |"
 	@echo "$(KGRN)+-------------------------------------------------------+"

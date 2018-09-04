@@ -6,23 +6,14 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:01:22 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/03 18:06:24 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/04 09:39:31 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_H
 # define WOLF_H
-# include "/goinfre/tmadau/.brew/include/SDL2/SDL.h"
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <math.h>
 
-# define WIN_HEIGHT 350
-# define WIN_WIDTH 515
+# include "gfx.h"
 
 typedef struct		s_info
 {
@@ -75,15 +66,5 @@ typedef struct		s_info
 	double			old_dir_x;
 	double			old_plane_x;
 }					t_info;
-
-//void				get_x_and_y(char *str, t_info *ev);
-//void				map_alloc(char *str, t_info *ev);
-//t_info				ft_ray_calc(t_info *ev);
-//t_info				ft_side_dist_calc(t_info *ev);
-//t_info				ft_dda_calc(t_info *ev);
-//t_info				ft_draw_stuff(t_info *ev);
-//t_info				ft_render_stuff(t_info *ev);
-//t_info				draw_ceiling(t_info *ev);
-//void				events(t_info *ev);
 
 #endif
