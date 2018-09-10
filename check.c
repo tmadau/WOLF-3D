@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 09:29:00 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/04 12:23:28 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/10 17:27:20 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ t_info		draw_floor(t_info *ev)
 	ev->count_j = ev->draw_end + 1;
 	while (ev->count_j < ev->height)
 	{
-		SDL_SetRenderDrawColor(ev->renderer, 0, 124, 255, 255);
+		SDL_SetRenderDrawColor(ev->renderer, 163, 94, 48, 0);
 		SDL_RenderDrawPoint(ev->renderer, ev->count_x, ev->count_j);
 		ev->count_j++;
 	}
@@ -193,7 +193,7 @@ t_info		draw_ceiling(t_info *ev)
 	ev->count_j = ev->draw_end + 1;
 	while (ev->count_j < ev->height)
 	{
-		SDL_SetRenderDrawColor(ev->renderer, 255, 124, 255, 255);
+		SDL_SetRenderDrawColor(ev->renderer, 0, 135, 255, 0);
 		SDL_RenderDrawPoint(ev->renderer, ev->count_x, ev->height -
 				ev->count_j);
 		ev->count_j++;
@@ -207,13 +207,13 @@ t_info		ft_render_stuff(t_info *ev)
 	draw_ceiling(ev);
 	ev->count_y = ev->draw_start;
 	if (ev->side == 0)
-		SDL_SetRenderDrawColor(ev->renderer, 0, 0, 255, 255);
+		SDL_SetRenderDrawColor(ev->renderer, 186, 133, 0, 0);
 	if (ev->side != 0)
-		SDL_SetRenderDrawColor(ev->renderer, 255, 0, 0, 255);
+		SDL_SetRenderDrawColor(ev->renderer, 214, 64, 0, 0);
 	if (ev->side == 0 && ev->ray_dir_x < 0)
-		SDL_SetRenderDrawColor(ev->renderer, 0, 255, 0, 255);
+		SDL_SetRenderDrawColor(ev->renderer, 255, 218, 168, 0);
 	if (ev->side == 1 && ev->ray_dir_y < 0)
-		SDL_SetRenderDrawColor(ev->renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(ev->renderer, 0xFF, 0x9f, 0, 0);
 	while (ev->count_y < ev->draw_end)
 	{
 		SDL_RenderDrawPoint(ev->renderer, ev->count_x, ev->count_y);
