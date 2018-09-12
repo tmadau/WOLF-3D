@@ -6,7 +6,7 @@
 #    By: tmadau <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/24 14:02:48 by tmadau            #+#    #+#              #
-#    Updated: 2018/09/04 11:08:09 by tmadau           ###   ########.fr        #
+#    Updated: 2018/09/12 14:52:01 by tmadau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = wolf3d
 
 KGRN = \x1B[32m
 
-CFILES = check.c \
+CFILES = ray_cast.c key_input.c draw_game.c main.c \
 
 LIB = ./libft/libft.a
 

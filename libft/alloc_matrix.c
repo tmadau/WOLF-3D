@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_matrix.c                                       :+:      :+:    :+:   */
+/*   alloc_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/21 10:11:07 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/12 17:13:51 by tmadau           ###   ########.fr       */
+/*   Created: 2018/09/11 08:12:13 by tmadau            #+#    #+#             */
+/*   Updated: 2018/09/12 14:14:44 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	get_matrix(char *str, t_map *ev)
+void	alloc_matrix(char *str, t_map *ev)
 {
-	int		fd;
-	char	*line;
-	int		buff;
-	int		inc;
+	int		index;
 
-	fd = open(str, O_RDONLY);
-	line = NULL;
-	inc = 1;
-	if (get_next_line(fd, &line) > 0)
-		buff = ft_wordcount(line, ' ');
-	free(line);
-	while (get_next_line(fd, &line) > 0)
+	index = 0;
+	ev->map = (double **)malloc(sizeof(double *) * ev->y);
+	while (index < ev->y)
 	{
-		free(line);
-		inc++;
+		ev->map[index] = (double *)malloc(sizeof(double) * ev->x);
+		index++;
 	}
-	ev->row = buff;
-	ev->x = buff;
-	ev->y = inc;
-	close(fd);
+	fill_matrix(str, ev);
 }

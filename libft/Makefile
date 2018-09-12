@@ -6,7 +6,7 @@
 #    By: tmadau <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/24 14:02:48 by tmadau            #+#    #+#              #
-#    Updated: 2018/08/21 10:16:08 by tmadau           ###   ########.fr        #
+#    Updated: 2018/09/12 11:45:01 by tmadau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CFILES = ft_itoa.c ft_putendl_fd.c ft_strequ.c ft_strnequ.c ft_lstdelone.c \
 		 ft_islower.c ft_putchar.c ft_strcpy.c ft_strncmp.c ft_toupper.c \
 		 ft_isprint.c ft_putchar_fd.c ft_strdel.c ft_strncpy.c ft_lstnew.c \
 		 ft_isupper.c ft_putendl.c ft_strdup.c ft_convert.c get_next_line.c \
-		 ft_wordcount.c get_matrix.c strjoin_free.c \
+		 ft_wordcount.c get_matrix.c fill_matrix.c alloc_matrix.c \
 
 OFILES = $(CFILES:.c=.o)
 

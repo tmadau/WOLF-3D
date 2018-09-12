@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 14:23:31 by tmadau            #+#    #+#             */
-/*   Updated: 2018/08/21 10:09:06 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/12 11:58:58 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "get_next_line.h"
 
 /*
@@ -103,17 +104,19 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 ** GRAPHICS FUNCTIONS
 */
 
-typedef struct		s_array
+typedef struct		s_map
 {
-	char			**matrix;
-	char			*link_rows;
-	char			*row;
-	int				ret;
-	long			count;
-	long			i;
-}					t_array;
+	double				**map;
+	int					get_x;
+	int					get_y;
+	int					fd;
+	size_t				row;
+	int					x;
+	int					y;
+}						t_map;
 
-char				*strjoin_free(char const *s1, char const *s2);
-int					get_matrix(t_array *n_row, int fd);
+void					get_matrix(char *str, t_map *ev);
+void					alloc_matrix(char *str, t_map *ev);
+void					fill_matrix(char *str, t_map *ev);
 
 #endif
