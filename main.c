@@ -6,13 +6,13 @@
 /*   By: tmadau <tmadau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 09:29:00 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/12 14:57:57 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/14 12:54:35 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		events(t_raycast *op, t_buttons *ev, t_sdl *in, t_map *ol)
+void	events(t_raycast *op, t_buttons *ev, t_sdl *in, t_map *ol)
 {
 	take_ev(op, ev, in);
 	while (SDL_PollEvent(&in->event))
@@ -41,19 +41,19 @@ void		events(t_raycast *op, t_buttons *ev, t_sdl *in, t_map *ol)
 
 void	ft_init_stuff(t_raycast *ev, t_sdl *in)
 {
-	ev->pos_x = 2;
-	ev->pos_y = 2;
+	ev->pos_x = 1.1;
+	ev->pos_y = 1.1;
 	ev->dir_x = -1;
 	ev->dir_y = 0;
 	ev->plane_x = 0;
 	ev->plane_y = 0.66;
 	in->time = 0;
 	in->old_time = 0;
-	in->height = 600;
+	ev->height = 600;
 	ev->width = 1000;
 }
 
-int			ft_sdl_init(t_sdl *ev)
+int		ft_sdl_init(t_sdl *ev)
 {
 	ev->running = 0;
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -69,7 +69,16 @@ int			ft_sdl_init(t_sdl *ev)
 	return (0);
 }
 
-int			main(int ac, char **av)
+void	game_engine(char **av, t_raycast *ev, t_map *in, t_sdl *op)
+{
+	get_matrix(av[1], in);
+	alloc_matrix(av[1], in);
+	place_player(av, ev);
+	ft_sdl_init(op);
+	ft_init_stuff(ev, op);
+}
+
+int		main(int ac, char **av)
 {
 	t_raycast	ev;
 	t_map		in;
@@ -79,13 +88,10 @@ int			main(int ac, char **av)
 	if (ac == 2)
 	{
 		if (open(av[1], O_RDONLY) == -1)
-			ft_putendl("Map error!");
+			ft_putstr(MAP_ERR);
 		else
 		{
-			get_matrix(av[1], &in);
-			alloc_matrix(av[1], &in);
-			ft_sdl_init(&op);
-			ft_init_stuff(&ev, &op);
+			game_engine(av, &ev, &in, &op);
 			while (op.running == 0)
 			{
 				while (ev.count_x++ < ev.width)
@@ -95,8 +101,11 @@ int			main(int ac, char **av)
 			SDL_DestroyWindow(op.window);
 			SDL_Quit();
 		}
+//		if (ev.count_x == -1)
+//			ft_putstr("FAILURE");
+//		ev.count_x == -2 ? ft_putstr(LINE_ERR) : ft_putstr(DATA_ERR);
 	}
 	else
-		ft_putstr("An error occured!\n");
+		ft_putstr(ARG_ERR);
 	return (0);
 }

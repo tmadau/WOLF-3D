@@ -6,7 +6,7 @@
 /*   By: tmadau <tmadau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:01:22 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/12 15:56:53 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/14 12:53:37 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define ARG_ERR "\x1b[31mWrong number of arguments | usage : ./wolf3d map\n"
 # define LINE_ERR "\x1b[31mFound wrong line length, program now Exiting\n"
+# define MAP_ERR "\x1b[31mNo map selected\n"
 # define DATA_ERR "\x1b[31mNo data found.\n"
 # define REND_COLOR SDL_SetRenderDrawColor
 # define SDX in->side_dist_x
@@ -28,7 +29,6 @@ typedef struct		s_sdl
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
 	SDL_Event		event;
-	int				height;
 	int				count_j;
 	int				draw_end;
 	int				draw_start;
@@ -62,6 +62,7 @@ typedef struct		s_raycast
 	int				step_x;
 	int				step_y;
 	int				width;
+	int				height;
 	int				map_x;
 	int				map_y;
 	int				hit;
@@ -90,5 +91,6 @@ void				ft_draw_stuff(t_raycast *ev, t_sdl *in);
 void				ft_dda_calc(t_raycast *ev, t_map *in);
 void				ft_side_dist_calc(t_raycast *ev);
 void				ft_ray_calc(t_raycast *ev);
+void				place_player(char **av, t_raycast *rc);
 
 #endif
