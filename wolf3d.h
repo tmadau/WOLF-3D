@@ -6,7 +6,7 @@
 /*   By: tmadau <tmadau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:01:22 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/14 12:53:37 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/17 16:28:13 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@
 # define MAP_ERR "\x1b[31mNo map selected\n"
 # define DATA_ERR "\x1b[31mNo data found.\n"
 # define REND_COLOR SDL_SetRenderDrawColor
-# define SDX in->side_dist_x
-# define SDY in->side_dist_y
+# define PRESS sdl->event.type == SDL_KEYDOWN
+# define RELEASE sdl->event.type == SDL_KEYUP
+# define PRS sdl->event.type == SDL_PRESSED
+# define NORM 0.005
+# define FLASH 0.02
+# define ALP_OPQ SDL_ALPHA_OPAQUE
+# define SDX op->side_dist_x
+# define SDY op->side_dist_y
 # include "/goinfre/tmadau/.brew/include/SDL2/SDL.h"
 # include "libft/libft.h"
 # include <math.h>
@@ -71,6 +77,10 @@ typedef struct		s_raycast
 
 typedef struct		s_buttons
 {
+	SDL_bool		left;
+	SDL_bool		right;
+	SDL_bool		down;
+	SDL_bool		up;
 	double			rot_speed;
 	double			old_plane_x;
 	double			old_dir_x;

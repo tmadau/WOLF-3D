@@ -6,26 +6,36 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 08:27:47 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/14 12:58:16 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/17 13:51:01 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		init_take(char *str, t_map *ev)
+void	init_take(char *str, t_map *ev)
 {
 	ev->get_x = 0;
 	ev->get_y = 0;
 	ev->fd = open(str, O_RDONLY);
 }
 
-void		fill_matrix(char *str, t_map *ev)
+int		err_check(t_map *ev)
+{
+	if (ev->get_y == 0 || ev->get_x == 0 || ev->ret == -1)
+	{
+		ft_putstr(DATA_ERR);
+		exit(0);
+	}
+	return (1);
+}
+
+void	fill_matrix(char *str, t_map *ev)
 {
 	char	*line;
 	char	**split;
 
 	init_take(str, ev);
-	while (get_next_line(ev->fd, &line) > 0 && ev->get_y < ev->y)
+	while ((ev->ret = get_next_line(ev->fd, &line)) > 0)
 	{
 		if ((ft_wordcount(line, ' ')) >= ev->row)
 		{
@@ -34,7 +44,7 @@ void		fill_matrix(char *str, t_map *ev)
 			while (ev->get_x < ev->x)
 			{
 				ev->map[ev->get_y][ev->get_x] =
-					(int)ft_atoi(split[ev->get_x]);
+					ft_atoi(split[ev->get_x]);
 				free(split[ev->get_x]);
 				ev->get_x++;
 			}
@@ -42,6 +52,7 @@ void		fill_matrix(char *str, t_map *ev)
 			free(line);
 			free(split);
 		}
+		err_check(ev);
 	}
 	close(ev->fd);
 }

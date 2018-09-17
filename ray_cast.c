@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 14:19:03 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/14 13:08:08 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/17 13:21:14 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_draw_stuff(t_raycast *ev, t_sdl *in)
 
 void	ft_dda_calc(t_raycast *ev, t_map *in)
 {
-	while (ev->hit == 0 && ev->map_x > 0 && ev->map_y > 0 && ev->map_x < ev->height - 2 && ev->map_y < ev->width - 2)
+	while (ev->hit == 0 && ev->map_x > 0 && ev->map_y > 0)
 	{
 		if (ev->side_dist_x < ev->side_dist_y)
 		{
