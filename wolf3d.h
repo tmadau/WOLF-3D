@@ -6,7 +6,7 @@
 /*   By: tmadau <tmadau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:01:22 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/17 16:28:13 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 12:00:49 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # define MAP_ERR "\x1b[31mNo map selected\n"
 # define DATA_ERR "\x1b[31mNo data found.\n"
 # define REND_COLOR SDL_SetRenderDrawColor
-# define PRESS sdl->event.type == SDL_KEYDOWN
-# define RELEASE sdl->event.type == SDL_KEYUP
-# define PRS sdl->event.type == SDL_PRESSED
+# define PRESS var->event.type == SDL_KEYDOWN
+# define RELEASE var->event.type == SDL_KEYUP
+# define KEY var->event.key.keysym.sym
 # define NORM 0.005
 # define FLASH 0.02
 # define ALP_OPQ SDL_ALPHA_OPAQUE
@@ -91,10 +91,8 @@ void				draw_floor(t_sdl *ev, t_raycast *in);
 void				draw_ceiling(t_sdl *ev, t_raycast *in);
 void				ft_render_stuff(t_sdl *ev, t_raycast *in);
 void				ft_do_stuff(t_raycast *ev, t_sdl *in, t_map *op);
-void				move_left(t_raycast *ev, t_buttons *in);
-void				move_right(t_raycast *ev, t_buttons *in);
-void				move_down(t_raycast *ev, t_buttons *in, t_map *op);
-void				move_up(t_raycast *ev, t_buttons *in, t_map *op);
+void				move_rotate(t_raycast *ev, t_buttons *in);
+void				move(t_raycast *ev, t_buttons *in, t_map *op);
 void				take_ev(t_raycast *op, t_buttons *ev, t_sdl *in);
 void				events(t_raycast *op, t_buttons *ev, t_sdl *in, t_map *ol);
 void				ft_draw_stuff(t_raycast *ev, t_sdl *in);

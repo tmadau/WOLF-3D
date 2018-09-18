@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 14:32:24 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/17 16:32:11 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/17 17:54:14 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ void	ft_render_stuff(t_sdl *var, t_raycast *op)
 	}
 }
 
-void	ft_do_stuff(t_raycast *ev, t_sdl *var, t_map *op)
+void	ft_do_stuff(t_raycast *op, t_sdl *var, t_map *in)
 {
-	ft_ray_calc(ev);
-	ft_side_dist_calc(ev);
-	ft_dda_calc(ev, op);
-	ft_draw_stuff(ev, var);
-	ft_render_stuff(var, ev);
+	ft_ray_calc(op);
+	ft_side_dist_calc(op);
+	ft_dda_calc(op, in);
+	ft_draw_stuff(op, var);
+	ft_render_stuff(var, op);
 }
 
-void	place_player(char **av, t_raycast *rc)
+void	place_player(char **av, t_raycast *op)
 {
 	int		c;
 	int		i;
@@ -77,12 +77,12 @@ void	place_player(char **av, t_raycast *rc)
 	while (av[++c])
 	{
 		i = -1;
-		while (++i < rc->width && i++ < rc->height)
+		while (++i < op->width && i++ < op->height)
 		{
-			if (av[c][i] == 0 && i + 1 < rc->width && i + 1 < rc->height)
+			if (av[c][i] == 0 && i - 1 < op->width && i - 1 < op->height)
 			{
-				rc->pos_x = c + 1;
-				rc->pos_y = i + 1;
+				op->pos_x = c + 1;
+				op->pos_y = i + 1;
 				break ;
 			}
 		}

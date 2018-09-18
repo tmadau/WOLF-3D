@@ -6,86 +6,86 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 14:19:03 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/17 13:21:14 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 09:49:35 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_draw_stuff(t_raycast *ev, t_sdl *in)
+void	ft_draw_stuff(t_raycast *op, t_sdl *var)
 {
-	if (ev->side == 0)
-		ev->perp_wall_dist = (ev->map_x - ev->ray_pos_x +
-				(1 - ev->step_x) / 2) / ev->ray_dir_x;
+	if (op->side == 0)
+		op->perp_wall_dist = (op->map_x - op->ray_pos_x +
+				(1 - op->step_x) / 2) / op->ray_dir_x;
 	else
-		ev->perp_wall_dist = (ev->map_y - ev->ray_pos_y +
-				(1 - ev->step_y) / 2) / ev->ray_dir_y;
-	ev->line_height = (int)(ev->height / ev->perp_wall_dist);
-	in->draw_start = -ev->line_height + ev->height / 2;
-	if (in->draw_start < 0)
-		in->draw_start = 0;
-	in->draw_end = ev->line_height + ev->height / 2;
-	if (in->draw_end >= ev->height)
-		in->draw_end = ev->height - 1;
+		op->perp_wall_dist = (op->map_y - op->ray_pos_y +
+				(1 - op->step_y) / 2) / op->ray_dir_y;
+	op->line_height = (int)(op->height / op->perp_wall_dist);
+	var->draw_start = -op->line_height + op->height / 2;
+	if (var->draw_start < 0)
+		var->draw_start = 0;
+	var->draw_end = op->line_height + op->height / 2;
+	if (var->draw_end >= op->height)
+		var->draw_end = op->height - 1;
 }
 
-void	ft_dda_calc(t_raycast *ev, t_map *in)
+void	ft_dda_calc(t_raycast *op, t_map *in)
 {
-	while (ev->hit == 0 && ev->map_x > 0 && ev->map_y > 0)
+	while (op->hit == 0 && op->map_x > 0 && op->map_y > 0)
 	{
-		if (ev->side_dist_x < ev->side_dist_y)
+		if (op->side_dist_x < op->side_dist_y)
 		{
-			ev->side_dist_x += ev->delta_dist_x;
-			ev->map_x += ev->step_x;
-			ev->side = 0;
+			op->side_dist_x += op->delta_dist_x;
+			op->map_x += op->step_x;
+			op->side = 0;
 		}
 		else
 		{
-			ev->side_dist_y += ev->delta_dist_y;
-			ev->map_y += ev->step_y;
-			ev->side = 1;
+			op->side_dist_y += op->delta_dist_y;
+			op->map_y += op->step_y;
+			op->side = 1;
 		}
-		if (in->map[ev->map_x][ev->map_y] > 0)
-			ev->hit = 1;
+		if (in->map[op->map_x][op->map_y] > 0)
+			op->hit = 1;
 	}
 }
 
-void	ft_side_dist_calc(t_raycast *ev)
+void	ft_side_dist_calc(t_raycast *op)
 {
-	if (ev->ray_dir_x < 0)
+	if (op->ray_dir_x < 0)
 	{
-		ev->step_x = -1;
-		ev->side_dist_x = (ev->ray_pos_x - ev->map_x) * ev->delta_dist_x;
+		op->step_x = -1;
+		op->side_dist_x = (op->ray_pos_x - op->map_x) * op->delta_dist_x;
 	}
 	else
 	{
-		ev->step_x = 1;
-		ev->side_dist_x = (ev->map_x + 1.0 - ev->ray_pos_x) * ev->delta_dist_x;
+		op->step_x = 1;
+		op->side_dist_x = (op->map_x + 1.0 - op->ray_pos_x) * op->delta_dist_x;
 	}
-	if (ev->ray_dir_y < 0)
+	if (op->ray_dir_y < 0)
 	{
-		ev->step_y = -1;
-		ev->side_dist_y = (ev->ray_pos_y - ev->map_y) * ev->delta_dist_y;
+		op->step_y = -1;
+		op->side_dist_y = (op->ray_pos_y - op->map_y) * op->delta_dist_y;
 	}
 	else
 	{
-		ev->step_y = 1;
-		ev->side_dist_y = (ev->map_y + 1.0 - ev->ray_pos_y) * ev->delta_dist_y;
+		op->step_y = 1;
+		op->side_dist_y = (op->map_y + 1.0 - op->ray_pos_y) * op->delta_dist_y;
 	}
 }
 
-void	ft_ray_calc(t_raycast *ev)
+void	ft_ray_calc(t_raycast *op)
 {
-	ev->cam_x = 2 * ev->count_x / (double)ev->width - 1;
-	ev->ray_pos_x = ev->pos_x;
-	ev->ray_pos_y = ev->pos_y;
-	ev->ray_dir_x = ev->dir_x + ev->plane_x * ev->cam_x;
-	ev->ray_dir_y = ev->dir_y + ev->plane_y * ev->cam_x;
-	ev->map_x = (int)ev->ray_pos_x;
-	ev->map_y = (int)ev->ray_pos_y;
-	ev->delta_dist_x = sqrt(1 + (ev->ray_dir_y * ev->ray_dir_y) /
-			(ev->ray_dir_x * ev->ray_dir_x));
-	ev->delta_dist_y = sqrt(1 + (ev->ray_dir_x * ev->ray_dir_x) /
-			(ev->ray_dir_y * ev->ray_dir_y));
-	ev->hit = 0;
+	op->cam_x = 2 * op->count_x / (double)op->width - 1;
+	op->ray_pos_x = op->pos_x;
+	op->ray_pos_y = op->pos_y;
+	op->ray_dir_x = op->dir_x + op->plane_x * op->cam_x;
+	op->ray_dir_y = op->dir_y + op->plane_y * op->cam_x;
+	op->map_x = (int)op->ray_pos_x;
+	op->map_y = (int)op->ray_pos_y;
+	op->delta_dist_x = sqrt(1 + (op->ray_dir_y * op->ray_dir_y) /
+			(op->ray_dir_x * op->ray_dir_x));
+	op->delta_dist_y = sqrt(1 + (op->ray_dir_x * op->ray_dir_x) /
+			(op->ray_dir_y * op->ray_dir_y));
+	op->hit = 0;
 }

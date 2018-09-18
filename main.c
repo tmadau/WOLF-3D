@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:00:37 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/17 17:37:53 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 11:38:38 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,8 @@
 
 void	movement(t_raycast *op, t_buttons *ev, t_map *in)
 {
-	move_up(op, ev, in);
-	move_down(op, ev, in);
-	move_right(op, ev);
-	move_left(op, ev);
-}
-
-void	events(t_raycast *op, t_buttons *ev, t_sdl *var, t_map *in)
-{
-	take_ev(op, ev, var);
-	while (SDL_PollEvent(&var->event))
-	{
-		if (var->event.type == SDL_QUIT)
-			var->running = 1;
-		if (var->event.type == SDL_KEYDOWN)
-		{
-			if (var->event.key.keysym.sym == SDLK_ESCAPE)
-				var->running = 1;
-			if (var->event.key.keysym.sym == SDLK_UP ||
-					var->event.key.keysym.sym == SDLK_w)
-				ev->up = SDL_TRUE;
-			if (var->event.key.keysym.sym == SDLK_DOWN ||
-					var->event.key.keysym.sym == SDLK_s)
-				ev->down = SDL_TRUE;
-			if (var->event.key.keysym.sym == SDLK_RIGHT ||
-					var->event.key.keysym.sym == SDLK_d)
-				ev->right = SDL_TRUE;
-			if (var->event.key.keysym.sym == SDLK_LEFT ||  
-					var->event.key.keysym.sym == SDLK_a)
-				ev->left = SDL_TRUE;
-		}
-		else if (var->event.type == SDL_KEYUP)
-		{
-			if (var->event.key.keysym.sym == SDLK_UP ||
-					var->event.key.keysym.sym == SDLK_w)
-				ev->up = SDL_FALSE;
-			if (var->event.key.keysym.sym == SDLK_DOWN ||
-					var->event.key.keysym.sym == SDLK_s)
-				ev->down = SDL_FALSE;
-			if (var->event.key.keysym.sym == SDLK_RIGHT ||
-					var->event.key.keysym.sym == SDLK_d)
-				ev->right = SDL_FALSE;
-			if (var->event.key.keysym.sym == SDLK_LEFT ||  
-					var->event.key.keysym.sym == SDLK_a)
-				ev->left = SDL_FALSE;
-		}
-	}
+	move(op, ev, in);
+	move_rotate(op, ev);
 }
 
 void	ft_init_stuff(t_raycast *op, t_sdl *var)
@@ -92,15 +48,15 @@ int		ft_sdl_init(t_sdl *var)
 	return (0);
 }
 
-void	game_engine(char **av, t_raycast *ev, t_map *in, t_sdl *var)
+void	game_engine(char **av, t_raycast *op, t_map *in, t_sdl *var)
 {
 	get_matrix(av[1], in);
 	alloc_matrix(av[1], in);
 	if (in->get_y != 0)
 	{
-		place_player(av, ev);
+		place_player(av, op);
 		ft_sdl_init(var);
-		ft_init_stuff(ev, var);
+		ft_init_stuff(op, var);
 	}
 	else
 	{
