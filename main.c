@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:00:37 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/18 15:42:45 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 16:44:08 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,24 @@ int		ft_sdl_init(t_sdl *var)
 void	game_engine(char **av, t_raycast *op, t_map *in, t_sdl *var)
 {
 	get_matrix(av[1], in);
-	printf("tk = %d\n", in->tk);
-	alloc_matrix(av[1], in);
 	if (in->tk == 0)
 	{
 		var->running = 1;
 		ft_putstr(LINE_ERR);
 	}
-	else if (!check_map(in, op))
+	else if (in->y != 0)
 	{
-		var->running = 1;
-		ft_putstr(MAP_ER);
-	}
-	else if (in->get_y != 0 && place_player(in, op))
-	{
-		ft_sdl_init(var);
-		ft_init_stuff(op, var);
+		alloc_matrix(av[1], in);
+		if (!check_map(in, op))
+		{
+			var->running = 1;
+			ft_putstr(MAP_ER);
+		}
+		else if (place_player(in, op))
+		{
+			ft_sdl_init(var);
+			ft_init_stuff(op, var);
+		}
 	}
 	else
 	{

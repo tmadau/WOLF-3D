@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 10:11:07 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/18 14:36:36 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 16:54:16 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ void	get_matrix(char *str, t_map *ev)
 	}
 	while ((ev->ret = get_next_line(ev->fd, &ev->line) > 0))
 	{
-		if ((size_t)ev->size == ft_wordcount(ev->line, ' '))
-			ev->inc++;
-		else
+		if ((size_t)ev->size != ft_wordcount(ev->line, ' '))
 			ev->tk = 0;
+		ev->inc++;
 		free(ev->line);
 	}
 	ev->row = ev->size;
