@@ -6,7 +6,7 @@
 /*   By: tmadau <tmadau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:01:22 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/18 12:00:49 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 15:44:09 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # define LINE_ERR "\x1b[31mFound wrong line length, program now Exiting\n"
 # define MAP_ERR "\x1b[31mNo map selected\n"
 # define DATA_ERR "\x1b[31mNo data found.\n"
+# define MAP_ER "\x1b[31mInvalid map.\n"
 # define REND_COLOR SDL_SetRenderDrawColor
 # define PRESS var->event.type == SDL_KEYDOWN
 # define RELEASE var->event.type == SDL_KEYUP
 # define KEY var->event.key.keysym.sym
-# define NORM 0.005
-# define FLASH 0.02
+# define ROT ev->rot_speed
+# define GO ev->move_speed
 # define ALP_OPQ SDL_ALPHA_OPAQUE
 # define SDX op->side_dist_x
 # define SDY op->side_dist_y
@@ -99,6 +100,7 @@ void				ft_draw_stuff(t_raycast *ev, t_sdl *in);
 void				ft_dda_calc(t_raycast *ev, t_map *in);
 void				ft_side_dist_calc(t_raycast *ev);
 void				ft_ray_calc(t_raycast *ev);
-void				place_player(char **av, t_raycast *rc);
+int					place_player(t_map *in, t_raycast *rc);
+void				movement(t_raycast *op, t_buttons *ev, t_map *in);
 
 #endif

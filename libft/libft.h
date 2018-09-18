@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 14:23:31 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/17 13:28:29 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 14:33:50 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct		s_map
 	size_t			row;
 	int				x;
 	int				y;
+	int				tk;
 }					t_map;
 
 void				get_matrix(char *str, t_map *ev);

@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 14:32:24 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/17 17:54:14 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 15:32:55 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,29 @@ void	ft_do_stuff(t_raycast *op, t_sdl *var, t_map *in)
 	ft_render_stuff(var, op);
 }
 
-void	place_player(char **av, t_raycast *op)
+int		place_player(t_map *in, t_raycast *op)
 {
 	int		c;
 	int		i;
+	int		space;
 
 	c = -1;
-	while (av[++c])
+	space = 0;
+	while (++c < in->get_y - 1 && space != 1)
 	{
 		i = -1;
-		while (++i < op->width && i++ < op->height)
+		while (i++ < in->get_x - 1)
 		{
-			if (av[c][i] == 0 && i - 1 < op->width && i - 1 < op->height)
+			if (in->map[c][i] == 0)
 			{
-				op->pos_x = c + 1;
-				op->pos_y = i + 1;
+				op->pos_x = c + 0.5;
+				op->pos_y = i + 0.5;
+				space = 1;
 				break ;
 			}
 		}
 	}
+	if (space == 0)
+		return (0);
+	return (1);
 }
