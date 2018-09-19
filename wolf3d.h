@@ -6,7 +6,7 @@
 /*   By: tmadau <tmadau@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:01:22 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/18 15:44:09 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 17:36:23 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,23 @@ typedef struct		s_buttons
 	double			move_speed;
 }					t_buttons;
 
-void				draw_floor(t_sdl *ev, t_raycast *in);
-void				draw_ceiling(t_sdl *ev, t_raycast *in);
-void				ft_render_stuff(t_sdl *ev, t_raycast *in);
-void				ft_do_stuff(t_raycast *ev, t_sdl *in, t_map *op);
-void				move_rotate(t_raycast *ev, t_buttons *in);
-void				move(t_raycast *ev, t_buttons *in, t_map *op);
-void				take_ev(t_raycast *op, t_buttons *ev, t_sdl *in);
-void				events(t_raycast *op, t_buttons *ev, t_sdl *in, t_map *ol);
-void				ft_draw_stuff(t_raycast *ev, t_sdl *in);
-void				ft_dda_calc(t_raycast *ev, t_map *in);
-void				ft_side_dist_calc(t_raycast *ev);
-void				ft_ray_calc(t_raycast *ev);
-int					place_player(t_map *in, t_raycast *rc);
+void				draw_floor(t_sdl *var, t_raycast *op);
+void				draw_ceiling(t_sdl *var, t_raycast *op);
+void				ft_render_stuff(t_sdl *var, t_raycast *op);
+void				ft_do_stuff(t_raycast *op, t_sdl *var, t_map *in);
+void				ft_init_stuff(t_raycast *op, t_sdl *var);
+void				move_rotate(t_raycast *op, t_buttons *ev);
+void				move(t_raycast *op, t_buttons *ev, t_map *in);
+void				take_ev(t_raycast *op, t_buttons *ev, t_sdl *var);
+void				events(t_raycast *op, t_buttons *ev, t_sdl *var, t_map *in);
+void				game_run(char **av, t_raycast *op, t_map *in, t_sdl *var);
+int					check_map(t_map *in, t_raycast *op);
+void				ft_draw_stuff(t_raycast *op, t_sdl *var);
+void				ft_dda_calc(t_raycast *op, t_map *in);
+void				ft_side_dist_calc(t_raycast *op);
+void				ft_ray_calc(t_raycast *op);
+int					ft_sdl_init(t_sdl *var);
+int					place_player(t_map *in, t_raycast *op);
 void				movement(t_raycast *op, t_buttons *ev, t_map *in);
 
 #endif

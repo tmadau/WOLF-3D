@@ -6,7 +6,7 @@
 /*   By: tmadau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:00:37 by tmadau            #+#    #+#             */
-/*   Updated: 2018/09/18 16:44:08 by tmadau           ###   ########.fr       */
+/*   Updated: 2018/09/18 17:36:18 by tmadau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		ft_sdl_init(t_sdl *var)
 	return (0);
 }
 
-void	game_engine(char **av, t_raycast *op, t_map *in, t_sdl *var)
+void	game_run(char **av, t_raycast *op, t_map *in, t_sdl *var)
 {
 	get_matrix(av[1], in);
 	if (in->tk == 0)
@@ -111,7 +111,7 @@ int		main(int ac, char **av)
 			ft_putstr(MAP_ERR);
 		else
 		{
-			game_engine(av, &op, &in, &var);
+			game_run(av, &op, &in, &var);
 			while (var.running == 0)
 			{
 				while (op.count_x++ < op.width)
